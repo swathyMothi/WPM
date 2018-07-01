@@ -8,8 +8,7 @@ class SignUpForm extends Component {
         this.state = {
             email: '',
             password: '',
-            name: '',
-            hasAgreed: false
+            name: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +17,7 @@ class SignUpForm extends Component {
 
     handleChange(e) {
         let target = e.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value;
+        let value = target.value;
         let name = target.name;
 
         this.setState({
@@ -27,11 +26,29 @@ class SignUpForm extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+            e.preventDefault();
+            // username should be atleast 5 characters
+            //  password should be min 8 letter password, with at least a symbol, upper and lower case letters and a number
+            var passwordMatchingExpression = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
-    }
+            if (this.state.email.length == 0 ||
+                this.state.password.length == 0 ||
+                this.state.name.length == 0) {
+                window.confirm('Form is empty. Please fill the details');
+            } else {
+                if ((this.state.name.length > 5)) {
+                        if (passwordMatchingExpression.test(this.state.password)) {
+                            console.log('The form was submitted with the following data:');
+                            console.log(this.state);
+                            // TODO redirect to another page. 
+                        } else {
+                            window.confirm('Password should require atleast a symbol, upper case, lower case and a number of length 8.');
+                        }
+                    } else {
+                        window.confirm('Username should be minimum 5 characters');
+                    }
+                }
+            }
 
     render() {
         return (
@@ -39,12 +56,12 @@ class SignUpForm extends Component {
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name">User Name</label>
-                <input type="text" id="name" className="FormField__Input" placeholder="Enter your user name" autocomplete="off" name="name" value={this.state.name} onChange={this.handleChange} />
+                <input type="text" id="name" className="FormField__Input" placeholder="Enter your user name" autoComplete="off" name="name" value={this.state.name} onChange={this.handleChange} />
               </div>
             
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="email">Email Address</label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" autocomplete="off" value={this.state.email} onChange={this.handleChange} />
+                <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" autoComplete="off" value={this.state.email} onChange={this.handleChange} />
               </div>
 
               <div className="FormField">
@@ -53,13 +70,7 @@ class SignUpForm extends Component {
               </div>
 
               <div className="FormField">
-                <label className="FormField__CheckboxLabel">
-                    <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> I agree all statements in <a href="" className="FormField__TermsLink">terms of service</a>
-                </label>
-              </div>
-
-              <div className="FormField">
-                  <button className="FormField__Button mr-20">Sign Up</button> <Link to="/sign-in" className="FormField__Link">Already have account?</Link>
+                  <button className="FormField__Button  mr-20">Sign Up</button> <Link to="/sign-in" className="FormField__Link">Already have account?</Link>
               </div>
             </form>
           </div>

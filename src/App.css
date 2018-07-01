@@ -117,6 +117,12 @@
   font-weight: 500;
 }
 
+.FormField__Button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
 .FormField__Link {
   color: #66707D;
   text-decoration: none;
