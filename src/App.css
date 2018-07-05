@@ -112,7 +112,7 @@
   border: none;
   outline: none;
   border-radius: 25px;
-  padding: 15px 70px;
+  padding: 15px 30px;
   font-size: 1em;
   font-weight: 500;
 }
@@ -148,10 +148,4 @@
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
-}
-
-input:-webkit-autofill {
-  -webkit-box-shadow:0 0 0 50px #022140 inset; 
-  box-shadow: #52C4B9;
-  -webkit-text-fill-color: #333;
 }
